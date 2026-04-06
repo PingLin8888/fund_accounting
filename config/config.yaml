@@ -1,20 +1,20 @@
 # Indentation matters — use spaces, not tabs
 
 # Folder containing files from Investran
-input_folder_a: ../reports/investran_reports
+input_folder_a: ./reports/investran_reports
 
 # Folder containing bank reports
-input_folder_b: ../reports/bank_reports
+input_folder_b: ./reports/bank_reports
 
 # Output folder for zipped file
-output_folder: ../zip_for_bank
+output_folder: ./zip_for_bank
 
 # Name of the zip file
 zip_name: report_bank.zip
 
 # Files to pick from Investran folder. Lists use -
 files_from_investran:
-  - bank_reports.xlsx
+  - bank_recs.xlsx
   - deals.xlsx
   - nav.xlsx
 
