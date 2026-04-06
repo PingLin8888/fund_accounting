@@ -19,14 +19,21 @@ with open (config_file, "r") as f:
 #     print(key, ":", value)
 
 # Build list of fiels to zip
+# [os.path.join(..., f) for f in ...] → list comprehension
+# os.path.join(config["input_folder_a"], f) → combines folder + filename
 files_to_zip = [os.path.join(config["input_folder_a"], f) for f in config["files_from_investran"]]
 files_to_zip.append(os.path.join(config["input_folder_b"], config["extra_file"]))
 
 # Output zip
 output_zip = os.path.join(config["output_folder"], config["zip_name"])
 
+# zipfile.ZipFile(output_zip, "w") → open a zip file in write mode
+# as zipf → gives you a variable zipf to work with inside the block
 with zipfile.ZipFile(output_zip, "w") as zipf:
     for f in files_to_zip:
+        # zipf.write(f, os.path.basename(f)) → add file to zip
+        # f → full path to file
+        # os.path.basename(f) → only the file name goes into zip, not the folders
         zipf.write(f, os.path.basename(f))
 
 print("zip created: ", output_zip)
