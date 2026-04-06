@@ -19,5 +19,4 @@ files_from_investran:
   - nav.xlsx
 
 # Extra file from another folder
-extra_file:
-  - bank_reports.xlsx
+extra_file: bank_reports.xlsx
