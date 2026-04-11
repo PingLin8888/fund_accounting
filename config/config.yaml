@@ -1,5 +1,14 @@
 # Indentation matters — use spaces, not tabs
 
+# determine year/month
+# optional override
+year: 2026
+month: 02
+
+# OR leave blank to auto use previous month
+# year:
+# month:
+
 # Folder containing files from Investran
 input_folder_a: ./reports/investran_reports
 

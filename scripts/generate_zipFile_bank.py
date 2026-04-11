@@ -1,10 +1,14 @@
 import os
 import zipfile
 import yaml
+from datetime import datetime, timedelta 
+
+# To be continued: add a bat file for non-dev to execute the code 
+
 
 # __file__ the full path of the script that is currently running
 # dirname takes a full path and returns the directory part, removing the filename.
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # folder where script lives
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_file = os.path.join(PROJECT_ROOT, "config", "config.yaml")
 
 # Load file paths
@@ -13,6 +17,25 @@ config_file = os.path.join(PROJECT_ROOT, "config", "config.yaml")
 # f is the file object, like a handle you use to read the file’s contents.
 with open (config_file, "r") as f:
     config = yaml.safe_load(f)
+
+# Determine year and month
+if config.get("year") and config.get("month"):
+    year = config["year"]
+    month = config["month"]
+    # f"..." → evaluates expressions inside {}
+    print(f"Using config date: {month}-{year}")
+else:
+    today = datetime.today()
+    first_day_this_month = today.replace(day=1)
+    # subtract 1 day from the 1st of this month
+    last_month = first_day_this_month - timedelta(days=1)
+    year = last_month.year
+    # 02d formats an integer ( d ) to a field of minimum width 2 ( 2 ), with zero-padding on the left (leading 0 )
+    month = f"{last_month.month:02d}"
+    
+    print(f"Using previous month automatically: {month}-{year}")
+
+
 
 # print("config loaded: ")
 # for key, value in config.items():
