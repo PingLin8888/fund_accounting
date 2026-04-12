@@ -83,8 +83,16 @@ common_funds = investran_set & bank_set
 missing_in_investran = bank_set - investran_set
 missing_in_bank = investran_set - bank_set
 
-print("missing_in_investran:", missing_in_investran)
-print("missing_in_bank:", missing_in_bank)
+# Print warning 
+if missing_in_investran:
+    print("⚠️ Missing in Investran folder:")
+    for fund in missing_in_investran:
+        print("  ", fund)
+
+if missing_in_bank:
+    print("⚠️ Missing in bank folder:")
+    for fund in missing_in_bank:
+        print("  ", fund)
 
 # Process intersection
 # Print warnings
