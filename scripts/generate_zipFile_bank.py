@@ -4,6 +4,7 @@ import yaml
 from datetime import datetime, timedelta 
 
 # To be continued: add a bat file for non-dev to execute the code 
+# lux non_lux. which is lux which is not
 
 
 # __file__ the full path of the script that is currently running
@@ -102,7 +103,7 @@ if missing_in_bank:
         print("  ", fund)
 
 
-# Build ZIP per fund
+# Get files per fund
 # [ RESULT  for f in ...  if condition ]
 for fund in common_funds:
     print()
@@ -137,23 +138,36 @@ for fund in common_funds:
     print()
     print("bank_file:", bank_file)
 
+    # Combine files
+    files_to_zip = investran_files.copy()
 
+    if bank_file:
+        files_to_zip.append(bank_file)
+        print()
+        print("files_to_zip: ",files_to_zip)
+    else:
+        print()
+        print(f"⚠️ No bank file found for {fund}")
+        continue
+
+    # Build zip name
+    zip_name = f"{fund}_{year}_{month}_BNP.zip"
+
+    output_folder = config["output_folder"]
+    os.makedirs(output_folder, exist_ok=True)
+
+    output_zip = os.path.join(output_folder,zip_name)
+    
+    # Create zip
+    # zipfile.ZipFile(output_zip, "w") → open a zip file in write mode
+    # as zipf → gives you a variable zipf to work with inside the block
+    with zipfile.ZipFile(output_zip, "w") as zipf:
+        for f in files_to_zip:
+            # f → full path to file
+            # os.path.basename(f) → only the file name goes into zip, not the folders
+            zipf.write(f, os.path.basename(f)) # → add file to zip
+
+    print("zip created: ", output_zip)
 
 # [os.path.join(..., f) for f in ...] → list comprehension
 # os.path.join(config["investran_reports"], f) → combines folder + filename
-# files_to_zip = [os.path.join(config["investran_reports_folder"], f) for f in config["files_from_investran"]]
-# files_to_zip.append(os.path.join(config["bank_reports_folder"], config["extra_file"]))
-
-# Output zip
-# output_zip = os.path.join(config["output_folder"], config["zip_name"])
-
-# zipfile.ZipFile(output_zip, "w") → open a zip file in write mode
-# as zipf → gives you a variable zipf to work with inside the block
-# with zipfile.ZipFile(output_zip, "w") as zipf:
-#     for f in files_to_zip:
-#         # zipf.write(f, os.path.basename(f)) → add file to zip
-#         # f → full path to file
-#         # os.path.basename(f) → only the file name goes into zip, not the folders
-#         zipf.write(f, os.path.basename(f))
-
-# print("zip created: ", output_zip)
