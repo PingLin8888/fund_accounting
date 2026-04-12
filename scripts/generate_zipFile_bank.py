@@ -75,7 +75,17 @@ for file in os.listdir(bank_reports_folder):
 
 print("bank_reports_funds:", bank_reports_funds)
 
-# Compare
+# Compare the diff in the 2 lists
+investran_set = set(investran_funds)
+bank_set = set(bank_reports_funds)
+
+common_funds = investran_set & bank_set
+missing_in_investran = bank_set - investran_set
+missing_in_bank = investran_set - bank_set
+
+print("missing_in_investran:", missing_in_investran)
+print("missing_in_bank:", missing_in_bank)
+
 # Process intersection
 # Print warnings
 
