@@ -41,9 +41,9 @@ else:
     print(f"Using previous month automatically: {month}-{year}")
 
 
-# Get funds from Investran
+# Get funds from Investran folder
 investran_folder = os.path.join(
-    config["investran_reports"],
+    config["investran_reports_folder"],
     str(year),
     str(month)
 )
@@ -57,7 +57,24 @@ investran_funds = [
 print("investran funds:", investran_funds)
 
 
-# Get funds from Bank
+# Get funds from Bank reports folder
+bank_reports_folder = os.path.join(
+    config["bank_reports_folder"],
+    str(year),
+    str(month)
+)
+
+# Extract fund name from file name
+bank_reports_funds = []
+for file in os.listdir(bank_reports_folder):
+    if file.endswith(".xlsx"):
+        file = os.path.basename(file)  # remove path
+        name = os.path.splitext(file)[0]  # remove .xlsx
+        fund_name = name.split("_")[2]
+        bank_reports_funds.append(fund_name)
+
+print("bank_reports_funds:", bank_reports_funds)
+
 # Compare
 # Process intersection
 # Print warnings
@@ -67,19 +84,19 @@ print("investran funds:", investran_funds)
 # Build list of fiels to zip for each fund
 # [os.path.join(..., f) for f in ...] → list comprehension
 # os.path.join(config["investran_reports"], f) → combines folder + filename
-files_to_zip = [os.path.join(config["investran_reports"], f) for f in config["files_from_investran"]]
-files_to_zip.append(os.path.join(config["input_folder_b"], config["extra_file"]))
+# files_to_zip = [os.path.join(config["investran_reports_folder"], f) for f in config["files_from_investran"]]
+# files_to_zip.append(os.path.join(config["bank_reports_folder"], config["extra_file"]))
 
 # Output zip
-output_zip = os.path.join(config["output_folder"], config["zip_name"])
+# output_zip = os.path.join(config["output_folder"], config["zip_name"])
 
 # zipfile.ZipFile(output_zip, "w") → open a zip file in write mode
 # as zipf → gives you a variable zipf to work with inside the block
-with zipfile.ZipFile(output_zip, "w") as zipf:
-    for f in files_to_zip:
-        # zipf.write(f, os.path.basename(f)) → add file to zip
-        # f → full path to file
-        # os.path.basename(f) → only the file name goes into zip, not the folders
-        zipf.write(f, os.path.basename(f))
+# with zipfile.ZipFile(output_zip, "w") as zipf:
+#     for f in files_to_zip:
+#         # zipf.write(f, os.path.basename(f)) → add file to zip
+#         # f → full path to file
+#         # os.path.basename(f) → only the file name goes into zip, not the folders
+#         zipf.write(f, os.path.basename(f))
 
-print("zip created: ", output_zip)
+# print("zip created: ", output_zip)

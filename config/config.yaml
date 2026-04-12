@@ -10,10 +10,10 @@ year:
 month:
 
 # Folder containing files from Investran
-investran_reports: ./reports/investran_reports
+investran_reports_folder: ./reports/investran_reports
 
 # Folder containing bank reports
-input_folder_b: ./reports/bank_reports
+bank_reports_folder: ./reports/bank_reports
 
 # Output folder for zipped file
 output_folder: ./zip_for_bank
