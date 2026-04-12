@@ -29,6 +29,7 @@ if config.get("year") and config.get("month"):
     year = config["year"]
     month = config["month"]
     # f"..." → evaluates expressions inside {}
+    print()
     print(f"Using config date: {month}-{year}")
 else:
     today = datetime.today()
@@ -39,6 +40,7 @@ else:
     # 02d formats an integer ( d ) to a field of minimum width 2 ( 2 ), with zero-padding on the left (leading 0 )
     month = f"{last_month.month:02d}"
     
+    print()
     print(f"Using previous month automatically: {month}-{year}")
 
 
@@ -55,6 +57,7 @@ investran_funds = [
     if os.path.isdir(os.path.join(investran_folder, f))
 ]
 
+print()
 print("investran funds:", investran_funds)
 
 
@@ -71,9 +74,10 @@ for file in os.listdir(bank_reports_folder):
     if file.endswith(".xlsx"):
         file = os.path.basename(file)  # remove path
         name = os.path.splitext(file)[0]  # remove .xlsx
-        fund_name = name.split("_")[2]
+        fund_name = name.split("_")[3]
         bank_reports_funds.append(fund_name)
 
+print()
 print("bank_reports_funds:", bank_reports_funds)
 
 # Compare the diff in the 2 lists
@@ -86,11 +90,13 @@ missing_in_bank = investran_set - bank_set
 
 # Print warning 
 if missing_in_investran:
+    print()
     print("⚠️ Missing in Investran folder:")
     for fund in missing_in_investran:
         print("  ", fund)
 
 if missing_in_bank:
+    print()
     print("⚠️ Missing in bank folder:")
     for fund in missing_in_bank:
         print("  ", fund)
@@ -99,7 +105,8 @@ if missing_in_bank:
 # Build ZIP per fund
 # [ RESULT  for f in ...  if condition ]
 for fund in common_funds:
-
+    print()
+    print("Processing fund: " + fund)
     # Get Investran files
     fund_investran_folder = os.path.join(investran_folder, fund)
 
@@ -116,17 +123,19 @@ for fund in common_funds:
         and any(keyword in f for keyword in allowed_keywords)
     ]
 
+    print()
     print("investran_files:",investran_files)
 
     # Get Bank file
     bank_file = None
 
-    for file in bank_reports_folder:
+    for file in os.listdir(bank_reports_folder):
         if fund in file:
             bank_file = os.path.join(bank_reports_folder, file)
             break
 
-
+    print()
+    print("bank_file:", bank_file)
 
 
 

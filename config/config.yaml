@@ -1,5 +1,7 @@
 # Indentation matters — use spaces, not tabs
 
+# Need a doc to specify what to do manually if automation broke and can't be fix
+
 # determine year/month
 # optional override
 # year: 2026
