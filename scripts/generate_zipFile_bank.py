@@ -18,6 +18,7 @@ config_file = os.path.join(PROJECT_ROOT, "config", "config.yaml")
 with open (config_file, "r") as f:
     config = yaml.safe_load(f)
 
+allowed_files = config["files_from_investran"]
 
 # print("config loaded: ")
 # for key, value in config.items():
@@ -94,12 +95,41 @@ if missing_in_bank:
     for fund in missing_in_bank:
         print("  ", fund)
 
-# Process intersection
-# Print warnings
+
+# Build ZIP per fund
+# [ RESULT  for f in ...  if condition ]
+for fund in common_funds:
+
+    # Get Investran files
+    fund_investran_folder = os.path.join(investran_folder, fund)
+
+    allowed_keywords = [
+        os.path.splitext(file)[0] # split extension ie xlsx
+        for file in config["files_from_investran"]
+    ]
+
+    investran_files = [
+        os.path.join(fund_investran_folder, f)
+        for f in os.listdir(fund_investran_folder)
+        if os.path.isfile(os.path.join(fund_investran_folder, f))
+        and f.endswith(".xlsx")
+        and any(keyword in f for keyword in allowed_keywords)
+    ]
+
+    print("investran_files:",investran_files)
+
+    # Get Bank file
+    bank_file = None
+
+    for file in bank_reports_folder:
+        if fund in file:
+            bank_file = os.path.join(bank_reports_folder, file)
+            break
 
 
 
-# Build list of fiels to zip for each fund
+
+
 # [os.path.join(..., f) for f in ...] → list comprehension
 # os.path.join(config["investran_reports"], f) → combines folder + filename
 # files_to_zip = [os.path.join(config["investran_reports_folder"], f) for f in config["files_from_investran"]]
