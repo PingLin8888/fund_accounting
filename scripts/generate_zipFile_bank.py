@@ -18,6 +18,11 @@ config_file = os.path.join(PROJECT_ROOT, "config", "config.yaml")
 with open (config_file, "r") as f:
     config = yaml.safe_load(f)
 
+
+# print("config loaded: ")
+# for key, value in config.items():
+#     print(key, ":", value)
+
 # Determine year and month
 if config.get("year") and config.get("month"):
     year = config["year"]
@@ -36,15 +41,33 @@ else:
     print(f"Using previous month automatically: {month}-{year}")
 
 
+# Get funds from Investran
+investran_folder = os.path.join(
+    config["investran_reports"],
+    str(year),
+    str(month)
+)
 
-# print("config loaded: ")
-# for key, value in config.items():
-#     print(key, ":", value)
+# Extract fund name from file name
+investran_funds = [
+    f for f in os.listdir(investran_folder)
+    if os.path.isdir(os.path.join(investran_folder, f))
+]
 
-# Build list of fiels to zip
+print("investran funds:", investran_funds)
+
+
+# Get funds from Bank
+# Compare
+# Process intersection
+# Print warnings
+
+
+
+# Build list of fiels to zip for each fund
 # [os.path.join(..., f) for f in ...] → list comprehension
-# os.path.join(config["input_folder_a"], f) → combines folder + filename
-files_to_zip = [os.path.join(config["input_folder_a"], f) for f in config["files_from_investran"]]
+# os.path.join(config["investran_reports"], f) → combines folder + filename
+files_to_zip = [os.path.join(config["investran_reports"], f) for f in config["files_from_investran"]]
 files_to_zip.append(os.path.join(config["input_folder_b"], config["extra_file"]))
 
 # Output zip

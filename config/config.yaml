@@ -2,15 +2,15 @@
 
 # determine year/month
 # optional override
-year: 2026
-month: 02
+# year: 2026
+# month: 02
 
 # OR leave blank to auto use previous month
-# year:
-# month:
+year:
+month:
 
 # Folder containing files from Investran
-input_folder_a: ./reports/investran_reports
+investran_reports: ./reports/investran_reports
 
 # Folder containing bank reports
 input_folder_b: ./reports/bank_reports
