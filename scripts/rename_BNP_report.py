@@ -2,8 +2,13 @@ import pandas as pd
 import os
 from pathlib import Path
 
+project_root = Path(__file__).parent.parent
+
+# Folder containing downloaded files
+folder = project_root / "reports/bank_reports" 
+
 # Read mapping file
-mapping = pd.read_excel("../data/legal_entity_mapping.xlsx")
+mapping = pd.read_excel(project_root / "data/legal_entity_mapping.xlsx")
 
 
 def rename_file(file):
@@ -27,9 +32,6 @@ def rename_file(file):
     
     except Exception as e:
         print(f"Error processing {file}: {e}")
-
-# Folder containing downloaded files
-folder = Path("../reports/bank_reports")
 
 # Loop through all excel files
 for file in folder.glob("*.xlsx"):
