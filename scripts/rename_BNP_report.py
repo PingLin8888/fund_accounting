@@ -2,6 +2,10 @@ import pandas as pd
 import os
 from pathlib import Path
 
+# __file__: the path of the current Python file
+# .parent: go up one folder. 
+# orginal: /Users/you/fund_accounting/scripts/my_script.py
+# .parent: /Users/you/fund_accounting/scripts
 project_root = Path(__file__).parent.parent
 
 # Folder containing downloaded files
