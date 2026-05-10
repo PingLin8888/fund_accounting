@@ -3,6 +3,16 @@ how to automate? who executes? do we need review? configure file to take path et
 If your Account column is numeric (float) vs string:
 1000000.01 vs "1000000.01"
 
+# QR: copy and paste 2 reports and check the commitments
+
+# iXBRL: annual report goes to some categories in DPL excel. and template tab extract data from diff fund tabs.
+
+# raise ticket like luis did to control that deal type has to match account sufix which indicates currency.
+
+# how to compare commitment from share register and driver report
+
+the end of cirtain col should match. how to grab the end of cirtain cols(formula vs python)
+
 # check gl booking weekly
 
 there's an excel file which is exported from a system.
@@ -58,3 +68,18 @@ windows os vs mac os
 
 Windows → folder\file.xlsx
 Mac/Linux → folder/file.xlsx
+
+# May 10 2026
+
+data reconciliation tool
+simple reporting dashboard
+API that processes financial data
+automation tool for CSV/Excel ingestion
+
+## Typical Python automation tasks:
+
+clean CSV/Excel files
+reconcile data between systems
+generate reports
+send emails / alerts
+simple ETL (extract-transform-load)
