@@ -3,7 +3,18 @@ how to automate? who executes? do we need review? configure file to take path et
 If your Account column is numeric (float) vs string:
 1000000.01 vs "1000000.01"
 
-# QR: copy and paste 2 reports and check the commitments
+# QR: copy and paste 2 reports and check the commitments. lux one vs non-lux one. matter???
+
+last row is total. so compare total first, if mismatch, compare each investor
+compare commitment by ID.
+color mismatches red.
+management share, 1 or 25 etc, ridiciously small.
+why this is often missed out in the RW report?
+
+so i had this task. i first download 2 reports from a system, then i open an excel and copy and paste those 2 reports in 2 seperate tabs. there's a third tab in the excel that checks if the totoal commitment from these 2 reports match. basically the commitment figure from those 2 reports are the last row in a specific col(say col "commitment" and col "commitment"). if they don't match, i need to find out why but about the commitment check,
+how could i automate it.
+
+dashboards? how many reports finished?
 
 # iXBRL: annual report goes to some categories in DPL excel. and template tab extract data from diff fund tabs.
 
